@@ -188,6 +188,11 @@ left: 45%;
 position: absolute;
 }
 
+#link-git a {
+	text-align: center;
+	align-items: center;
+}
+
 /*
  * Fontes vão se adaptar sozinhas ao tamanho da tela
  */
