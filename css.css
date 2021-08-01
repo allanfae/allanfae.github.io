@@ -182,16 +182,15 @@ footer {
 }
 
 #link-git {
-text-decoration: none;
-color: white;
-left: 45%;
-position: absolute;
+    text-decoration: none;
+    color: rgb(212, 212, 212);
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-decoration: none;
+    display: block;
+    text-align: center;
 }
 
-#link-git a {
-	text-align: center;
-	align-items: center;
-}
 
 /*
  * Fontes vão se adaptar sozinhas ao tamanho da tela
