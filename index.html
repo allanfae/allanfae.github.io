@@ -1,109 +1,193 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allan Faé Page</title>
-    <link rel="stylesheet" href="css.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <header class="menu">
-        <div id="brand">
-            <a class="twenty" href="#home"><img src="./logo.jpg" alt="logo"></a>
-        </div>
-        <div class="twenty" id="menu">
-            <a href="#home">Início</a>
-            <a href="#about">Sobre</a>
-            <a href="#acad-training-content">Formação</a>
-            <a href="#xp-content">Experiência</a>
-            <a href="#contact">Contato</a>
-        </div>
-    </header>
 
-    <main>
-        <!--Home Tags-->
-        <div id="home">
-            <div class="title">
-                <h1 class="one-hundred bold" id="name">Allan Faé</h1>
-                <h1 class="one-hundred bold" id="last-name"></h1>
-                <h1 class="one-hundred bold" id="soft-word">Software Developer</h1>
-                <h1 class="one-hundred bold" id="dev-word"></h1>
+    
+
+
+  
+  <!-- Modal para Adicionar Nova Tarefa -->
+  <div id="add-task-modal" class="modal">
+    <div class="modal-content">
+      <h3>Adicionar Nova Tarefa</h3>
+      <form id="task-form">
+        <div class="input-group">
+          <span class="material-icons">label</span>
+          <input type="text" id="task-name" class="input-with-icon" placeholder="Nome da tarefa" required />
+
+        </div>
+        <div class="input-group-parallel">
+          <div class="input-with-icon">
+            <span class="material-icons">attach_money</span>
+            <input type="number" id="task-cost" placeholder="Custo $" min="0" required />
+          </div>
+          <div class="input-with-icon">        
+            <span class="material-icons">event</span>
+            <input type="date" id="task-due-date" required />
+          </div>
+        </div>
+        <div class="button-group">
+          <button type="submit" id="submit-task" class="button-submit">
+            <span class="material-icons">add_circle</span> Adicionar
+          </button>
+          <button type="button" id="cancel-task" class="button-cancel">
+            <span class="material-icons">cancel</span> Sair
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+<div>
+  <div class="center-button">
+    <button id="open-modal-button" class="modal-btn">
+      <span class="material-icons">assignment</span>Adicionar Nova Tarefa<span class="material-icons">add_task</span>
+    </button>
+  </div>
+
+<div id="task-list-container">
+  <div id="task-title">
+    <h1>
+      <span class="material-icons">assignment</span> 
+      Lista de Tarefas
+      <span class="material-icons">assignment</span>
+  </div>  
+  </h1>
+  <div id="task-list">
+    <!-- As tarefas serão listadas aqui -->
+    <div class="task-item">
+      <div class="task-info">
+        <p><strong>Tarefa de exemplo</strong></p>
+        <p>Custo: R$50,00<span class="material-icons">attach_money</span></p>
+        <p>Prazo: 2024-11-20<span class="material-icons">event</span></p>
+      </div>
+      <div class="task-actions">
+        <button class="reorder">
+          <span class="material-icons">arrow_upward</span>
+        </button>
+        <button class="reorder">
+          <span class="material-icons">arrow_downward</span>
+        </button>
+        <button class="edit">
+          <span class="material-icons">edit</span>
+        </button>
+        <button class="delete">
+          <span class="material-icons">delete</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div id="delete-modal" class="modal">
+    <div class="modal-content">
+      <h3>Tem certeza que deseja excluir esta tarefa?</h3>
+      <div class="button-container">
+        <button id="confirm-delete" class="modal-btn1">
+          <span class="material-icons">check_circle</span> Sim
+        </button>
+        <button id="cancel-delete" class="modal-btn2">
+          <span class="material-icons">cancel</span> Não
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal para Editar Tarefa -->
+    <div id="edit-modal" class="modal">
+      <div class="modal-content">
+        <h3>Editar Tarefa</h3>
+        <form id="edit-form">
+          <!-- Nome da Tarefa com ícone -->
+          <label id="tsk1" for="edit-task-name">Nome da Tarefa</label>
+          <div class="input-group">
+            <div class="input-with-icon">
+              <span class="material-icons">label</span>
+              <input type="text" id="edit-task-name" placeholder="Nome da tarefa" required />
             </div>
-        </div>
-
-        <!--About Me Tags-->
-        
-        <div class="twenty" id="about">
-                <div class="content-about">
-                    <h2 class="forty">Sobre</h2>
-                    <p>Sempre em busca de conhecimento e desafios, procuro sempre o desenvolvimento pessoal e profissional. Possuo facilidade em aprender, boa sinergia com as pessoas à minha volta, sou comprometido com o resultado e aberto a mudanças e sugestões para a melhoria contínua.</p>
-                    <img src="my-photo.jpg" alt="My photo">
-                 </div>
-        </div>
-
-        <!--Academic Training Tags-->
-            <div id="acad-training-content" class="acad-training-content twenty">
-                    <h2 class="forty">Formação</h2>
-                    <p>- Segundo grau completo;</p>
-                    <p>- Cursando faculdade de Sistemas de Informação na UVV;</p>
-                    <p>- Eletricidade Geral (SENAI-ES, 2008 - Menor Aprendiz concedido pela empresa Flexibrás);</p>
-                    <p>- Eletrotécnica (IFES, 2012);</p>
-                    <p>- Treinamento para trabalho com eletricidade (NR-10);</p>
-                    <p>- HUET;</p>
-                    <p>- CBSP;</p>
-                    <p>- Inglês intermediário para comunicação;</p>
-                    <p>- CNH Tipo B;</p>
-                        
+          </div>
+          
+          <!-- Custo e Prazo lado a lado -->
+          <div class="input-group input-group-parallel">
+            <div class="input-with-icon">
+              <span class="material-icons">attach_money</span>
+              <input type="number" id="edit-task-cost" placeholder="Custo (R$)" required />
             </div>
-
-        <!--Experiences Tags-->
-        <div class="twenty" id="xp-content">
-            <div class="xp-content">
-                <h2 class="forty">Professional Experiences</h2>
-                <p>- 2011 - Estagiário na área de projetos elétricos; </p>
-                <p>Duração: 5 meses;</p>
-                <p>Empresa: Ecocel.</p>
-                <p> </p>
-                <p>- 2012 - Estagiário na área de montagem, manutenção e diagnóstico de motores e geradores de locomotivas;</p>  
-                <p>Duração: 12 meses;</p>   
-                <p>Empresa: Vale.</p>   
-                <p> </p>   
-                <p>- 2014 – Oficial de Manutenção Elétrica focado em preventivas, corretivas e inspeção de equipamentos elétricos até 440V dentre eles motores CC/CA, painéis elétricos, tensionadores, ponte rolante, maquinas de solda e etc;</p>
-                <p>Duração: 11/12/13 – 15/03/16</p>
-                <p>Empresa: Technip.</p>
-                <p>- 2019 – Atualmente trabalhando como autônomo em reparo de placas-mãe e placas de vídeo com solda BGA. Compra, venda e qualificação de produtos de hardware em geral.
-                </p>
-
+            <div class="input-with-icon">
+              <span class="material-icons">event</span>
+              <input type="date" id="edit-task-due-date" required />
             </div>
+          </div>
+
+          <!-- Botões de salvar e cancelar lado a lado -->
+          <div class="button-group">
+            <button type="submit" id="edit-task-button">
+              <span class="material-icons">save</span> Salvar Alterações
+            </button>
+            <button type="button" id="cancel-edit">
+              <span class="material-icons">cancel</span> Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+  
+  <template id="task-template">
+    <div class="task-item" draggable="true" data-task-id="">
+      <div class="task-info">
+        <p><span class="material-icons">key</span> ID: <span class="task-id"></span></p>
+        <p class="task-name-line"><span class="material-icons">label</span> Nome: <span class="task-name"></span></p> <!-- Linha do nome -->
+        <div class="task-info-row">
+          <p><span class="material-icons">attach_money</span> Custo: <span class="task-cost"></span> R$</p>
         </div>
-
-
-
-        <!--Contact Tags-->
-        <div id="contact" class="contact">
-            <div class="contact-content">
-                <h1 id="contact-me-word" class="forty">Contato</h1>
-                <h1 class="thirty light">Endereço:</h1>
-                <p class="twenty">Brasil, Espírito Santo, Cariacica</p>
-                <h1 class="thirty light">Telefone:</h1>
-                <p class="twenty">+55 27999641334</p>
-                <h1 class="thirty light">Email Addres:</h1>
-                <p class="twenty">allan_fae@hotmail.com</p>
-                <h1 class="thirty light">Meu GitHub:</h1>
-                <a id="link-git" class="twenty" href="https://github.com/allanfae">GitHub - Allan Faé</a>
-                <h1 id="discord-word" class="thirty light">Discord:</h1>
-                <p class="twenty">Allan Faé#0445</p>
-            </div>
+        <div class="task-info-row">
+          <p><span class="material-icons">event</span> Data: <span class="task-date"></span></p>
         </div>
-    </main>
-
-    <footer id="footer" class="twenty light">
-        Copyright ©2020 All rights reserved | This template is made by Allan Bruno Faé.
-    </footer>
-
-    <!--Script Tags-->
-    <script src="js.js"></script>
-
-
+      </div>
+      <!-- Ações de editar/excluir e setas em uma linha -->
+      <div class="task-actions">
+        <button class="edit btn btn-primary">
+          <span class="material-icons">edit</span>
+          <span class="tooltip">Editar</span>
+        </button>
+        <button class="delete btn btn-danger">
+          <span class="material-icons">delete</span>
+          <span class="tooltip">Excluir</span>
+        </button>
+        <div class="task-actions-arrows">
+          <button class="reorder btn btn-success">
+            <span class="material-icons">arrow_upward</span>
+            <span class="tooltip">Subir tarefa</span>
+          </button>
+          <button class="reorder btn btn-warning">
+            <span class="material-icons">arrow_downward</span>
+            <span class="tooltip">Descer tarefa</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
