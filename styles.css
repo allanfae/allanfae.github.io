@@ -1,0 +1,746 @@
+/* ---------- Reset Básico ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+/* Estilos do botão de adicionar tarefa */
+.modal-btn {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eff4fa; /* Azul marinho */
+    color: #173352;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px 200px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ícone dentro do botão */
+  .modal-btn .material-icons {
+    margin-right: 8px; /* Distância entre o ícone e o texto */
+    font-size: 24px;
+  }
+  
+  /* Efeito de hover e foco */
+  .modal-btn:hover {
+    background-color: #cfdff1; /* Azul mais claro ao passar o mouse */
+    transform: translateY(20px); /* Pequeno efeito de levantamento */
+  }
+  
+  /* Centraliza o botão na tela */
+  .center-button {
+    position: absolute; /* Para posicionar em relação à página */
+    top: 5%; /* Fixa no fundo da página */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta o centramento */
+  }
+  
+
+body {
+    font-family: Arial, sans-serif;
+    align-items: center;
+    margin-top: 50px;
+    background-color: #0a1726;
+    line-height: 1;
+}
+
+/* ---------- Cabeçalhos ---------- */
+h1 {
+    text-align: center;
+    color: #ffffff;
+}
+
+h2 {
+    text-align: center;
+    color: #ffffff;
+}
+
+/* ---------- Formulários ---------- */
+form {
+    display: flex;
+    flex-direction: column; /* Para alinhar os inputs verticalmente */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Ajustes nos campos de entrada */
+form input {
+    padding: 8px;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+#task-due-date {
+    font-family: Arial;
+    font-size: 0.9rem;
+    max-width: 250px;
+    color: gray;
+}
+
+#task-due-date:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* ---------- Lista de Tarefas ---------- */
+#task-list {
+    margin-top: 20px;
+    overflow-y: auto; /* Habilita a rolagem apenas para o conteúdo */
+    flex-grow: 1; /* Faz com que o conteúdo ocupe o espaço restante */
+    height: calc(100% - 40px); /* Ajuste para garantir que ocupe a altura restante após o título */
+    scrollbar-gutter: stable; /* Reserva espaço para a barra de rolagem */
+    padding-left: 16px;
+}
+
+.task-actions-group {
+    display: flex;
+    justify-content: space-between; /* Distancia as ações e setas */
+    gap: 20px; /* Espaço entre as colunas */
+    align-items: center; /* Alinha as ações na mesma linha */
+  }
+
+.task-item {
+    min-width: 400px;
+    background-color: #dce8f4;
+    margin: 15px 150px;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    gap: 20px; /* Distância entre os dois grupos */
+}
+
+.task-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Remover animação do nome da tarefa */
+.task-info .task-name {
+    transition: none !important; /* Remover qualquer transição ou animação */
+    transform: none !important;  /* Garantir que não tenha transformação */
+}
+
+
+.task-id {
+    font-weight: bold;
+  }
+
+.task-info p {
+    margin-bottom: 0px;
+    margin-top: 5px;
+    font-size: 1rem;
+    color: #333;
+    display: flex;
+    align-items: center;  /* Alinha verticalmente o ícone e o texto */
+    gap: 2px;  /* Cria um espaço entre o ícone e o texto */
+}
+
+.material-icons {
+    font-size: 20px;  /* Ajuste o tamanho do ícone, se necessário */
+    vertical-align: middle; /* Certifica que o ícone fica alinhado com o meio do texto */
+  }
+
+
+
+
+
+  .task-name-line {
+    font-weight: bold;        /* Coloca o nome em negrito */
+    font-size: 1.2em;         /* Ajusta o tamanho da fonte */
+    color: #387bc4 !important;             /* Define uma cor para o texto */
+    margin-bottom: 10px;      /* Dá um pequeno espaçamento abaixo */
+  }
+  
+  .task-name-line .material-icons {
+    vertical-align: middle;  /* Alinha o ícone com o texto */
+    margin-right: 5px;        /* Dá um pequeno espaçamento entre o ícone e o nome */
+  }
+  
+
+
+
+
+
+
+.task-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-info-row p {
+    margin: 0;
+    padding: 5px;
+    padding-left: 0;
+    font-size: 0.9rem;
+}
+
+/* ---------- Destaque de Custo ---------- */
+.task-item.highlight {
+    border: 3px solid #ee6767;
+    box-shadow: 0 4px 10px rgba(243, 156, 18, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: yellow;
+}
+
+.task-item.highlight:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.task-actions {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+    align-items: center; /* Centraliza os botões de Editar e Excluir na coluna */
+}
+
+.task-actions .btn {
+    position: relative;  /* Necessário para posicionar o título */
+}
+
+.task-actions .btn .tooltip {
+    display: none; /* Inicialmente escondido */
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    z-index: 999;
+    white-space: nowrap;
+    opacity: 0; /* Começa invisível */
+    transition: opacity 0.3s ease, visibility 0s 0.3s; /* Transição suave */
+    margin-bottom: 2px;
+}
+
+/* Torna o tooltip visível quando o botão está em hover */
+.task-actions .btn:hover .tooltip {
+    display: block; /* Torna o tooltip visível */
+    opacity: 1;     /* Aumenta a opacidade */
+    visibility: visible; /* Assegura que a tooltip será visível */
+    transition: opacity 0.3s ease, visibility 0s; /* Não adicionar delay para a transição */
+}
+/* ---------- Ajustes para os ícones de ação ---------- */
+button.edit .material-icons,
+button.delete .material-icons {
+    font-size: 16px; /* Ajusta o tamanho dos ícones */
+}
+
+/* ---------- Botões Editar e Excluir ---------- */
+button.edit {
+    background-color: #3498db;
+    color: white;
+}
+
+button.edit:hover {
+    background-color: #2980b9;
+}
+
+button.delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button.delete:hover {
+    background-color: #c0392b;
+}
+
+
+.task-actions-arrows {
+    display: flex;  
+    flex-direction: column;  /* Organiza os botões Subir e Descer em coluna (um embaixo do outro) */
+    justify-content: center;  /* Centraliza verticalmente os botões dentro da div */
+    align-items: center;  /* Centraliza horizontalmente os botões */
+    gap: 10px;  /* Espaçamento entre os botões */
+    height: 100%;  /* Para garantir que ocupe a altura completa do container */
+}
+
+.task-actions-buttons{
+    display: flex;  
+    flex-direction: column;  /* Organiza os botões Subir e Descer em coluna (um embaixo do outro) */
+    justify-content: center;  /* Centraliza verticalmente os botões dentro da div */
+    align-items: center;  /* Centraliza horizontalmente os botões */
+    gap: 10px;  /* Espaçamento entre os botões */
+    height: 100%;  /* Para garantir que ocupe a altura completa do container */
+
+}
+
+/* ---------- Botões de Ordem (Subir/Descer) ---------- */
+.task-actions-arrows .reorder {
+    color: #ffffff;
+    display: flex;             /* Usar flexbox para centralizar o ícone */
+    justify-content: center;   /* Centralizar o conteúdo horizontalmente */
+    align-items: center;       /* Centralizar o conteúdo verticalmente */
+    border-radius: 50%;        /* Bordas arredondadas (circular) */
+    border: none;              /* Remover borda padrão */
+    background-color: #2a5d97; /* Fundo preto (ou altere conforme necessário) */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    cursor: pointer;          /* Cursor de clique */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transição suave para efeito de hover */
+}
+
+.task-actions-arrows .reorder:hover {
+    background-color: #387bc4; /* Cor de fundo ao passar o mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra maior no hover */
+}
+
+.task-actions-arrows .reorder:active {
+    background-color: #e0e0e0; /* Cor de fundo ao clicar */
+}
+
+/* Diminuir o tamanho das setas */
+.task-actions-arrows .reorder .material-icons {
+    font-size: 16px;           /* Tamanho das setas (diminui de 20px para 16px) */
+}
+  
+button {
+    border-radius: 50%;        /* Bordas arredondadas (circular) */
+    padding: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    max-width: 120px;
+    border: none;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button.edit {
+    background-color: #3498db;
+    color: white;
+}
+
+button.edit:hover {
+    background-color: #2980b9;
+}
+
+button.delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button.delete:hover {
+    background-color: #c0392b;
+}
+
+
+/* ---------- Modais ---------- */
+.modal {
+    display: none; /* Inicialmente escondido */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px; /* Tamanho máximo do modal */
+}
+
+
+#confirm-delete {
+    background-color: #d9534f;
+    color: white;
+}
+
+#cancel-delete {
+    background-color: #5bc0de;
+    color: white;
+}
+
+/* ---------- Feedback Visual de Arraste ---------- */
+.task-item[draggable="true"]:active {
+    opacity: 0.6;
+}
+
+.task-item.drag-over {
+    border: 2px dashed #007bff;
+    background-color: #f1f8ff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* ---------- Responsividade ---------- */
+
+
+/* Estilos específicos para o formulário de adição */
+.add-task-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff; /* Cor de fundo do formulário */
+    box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.5); /* Sombra suave */
+    width: 100%;
+    max-width: 500px; /* Máxima largura do formulário */
+    align-items: center;
+    margin-bottom: 15px;
+    margin: 0 auto; /* Garante que o formulário ficará centralizado dentro do body */
+}
+
+.form-row {
+    display: flex;
+    justify-content:space-evenly; /* Para alinhar os campos lado a lado */
+    margin: 5px;
+    width: 100%;
+}
+
+.add-task-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fafafa; /* Cor de fundo dos inputs */
+    width: 40%; /* Largura de cada input na linha */
+}
+
+.add-task-form button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 40%;
+    max-width: 250px;
+}
+
+.add-task-form button:hover {
+    background-color: #2980b9;
+}
+
+h3{
+    color: #173352;
+}
+
+button.edit .material-icons,
+button.delete .material-icons {
+    font-size: 16px; /* Diminui o tamanho dos ícones dentro dos botões */
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+
+#task-list-container {
+    background-color: #173352; /* Azul escuro */
+    color: #FFFFFF; /* Texto branco para contraste */
+    border-top-right-radius: 8px; /* Bordas arredondadas */
+    border-top-left-radius: 8px;
+    padding-top: 20px; /* Padding geral */
+    margin: auto; /* Margem para separação */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+    max-width: 140vh; /* Limita a largura máxima */
+    width: 100%; /* Garante largura fixa (ajustável conforme necessidade) */
+    height: 80vh; /* Altura fixa do contêiner */
+    display: flex;
+    flex-direction: column;
+
+    position: absolute; /* Para posicionar em relação à página */
+    bottom: 0; /* Fixa no fundo da página */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta o centramento */
+
+    overflow-y: auto; /* Habilita rolagem interna */
+    overflow-x: hidden; /* Evita rolagem horizontal */
+    flex-shrink: 0; /* Evita que o contêiner diminua de tamanho */
+}
+
+#task-title {
+    position: sticky;
+    top: 0; /* Fixar o título no topo */
+    background-color: #173352; /* Cor de fundo do título */
+    z-index: 10; /* Garante que o título fique acima do conteúdo rolável */
+    padding-top: 20px; /* Espaço abaixo do título */
+}
+
+
+
+/* Contêiner para os botões */
+.button-container {
+    display: flex !important;
+    justify-content: space-between !important; /* Botões nas extremidades */
+    width: 100% !important;
+    margin-top: 20px !important; /* Espaçamento superior para dar respiro */
+}
+
+/* Estilos para o botão de confirmação (Sim) */
+#confirm-delete, #edit-task-button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 12px 24px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    background-color: #28a745 !important; /* Verde */
+    color: white !important;
+    transition: background-color 0.3s ease, transform 0.2s ease !important;
+    margin-right: 10px !important; /* Espaçamento à direita */
+}
+
+/* Estilo de hover para o botão de confirmação */
+#confirm-delete, #edit-task-button:hover {
+    background-color: #218838 !important; /* Verde mais escuro */
+    transform: translateY(-2px) !important; /* Efeito de elevação */
+}
+
+/* Estilos para o botão de cancelamento (Não) */
+#cancel-delete, #cancel-edit{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 12px 24px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    background-color: #dc3545 !important; /* Vermelho */
+    color: white !important;
+    transition: background-color 0.3s ease, transform 0.2s ease !important;
+    margin-left: 10px !important; /* Espaçamento à esquerda */
+}
+
+/* Estilo de hover para o botão de cancelamento */
+#cancel-delete, #cancel-edit:hover {
+    background-color: #c82333 !important; /* Vermelho mais escuro */
+    transform: translateY(-2px) !important; /* Efeito de elevação */
+}
+
+/* Ícones dentro dos botões */
+#confirm-delete .material-icons, #cancel-delete .material-icons {
+    margin-right: 8px !important;
+    font-size: 20px !important;
+}
+
+#edit-modal {
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo do modal */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.input-group {
+    margin-bottom: 15px !important;
+    display: flex !important;
+    justify-content: center;
+    gap: 8px; /* Espaçamento entre o ícone e o input */
+    align-items: center;
+    width: auto;
+  }
+
+.input-group .material-icons {
+    color:#888; /* Aplica a cor específica apenas para o ícone dentro da .input-group */
+
+}
+
+#tsk1 {
+    display: block;              /* Faz com que o label ocupe uma linha inteira */
+    font-size: 12px;             /* Define o tamanho da fonte */
+    font-weight: bold;           /* Torna o texto em negrito */
+    color: #173352;                 /* Cor do texto */
+    margin-bottom: 8px;          /* Espaçamento abaixo do label */
+    margin-top: 10px;            /* Adiciona um espaço superior */
+  }
+
+  .input-group label {
+    display: block !important;
+    margin-bottom: 5px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+  }
+  
+  /* Estilo para inputs com ícones */
+  .input-with-icon {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  
+  .input-with-icon input {
+    width: 100% !important;
+    padding: 10px !important;
+    border-radius: 4px !important;
+    border: 1px solid #ccc !important;
+  }
+  
+  .input-with-icon .material-icons {
+    font-size: 20px !important;
+    color: #888 !important;
+  }
+  
+  /* Estilo para os grupos paralelos (Custo e Prazo) */
+  .input-group-parallel {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+  
+  .input-group-parallel .input-with-icon {
+    flex: 1 !important;
+  }
+  
+  /* Estilo para os botões */
+  .button-group {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 20px !important; /* Respiro entre os botões */
+    margin-top: 20px !important;
+  }
+  
+
+  button#edit-task-button {
+    background-color: #28a745  !important;
+    color: white !important;
+  }
+  
+  button#cancel-edit {
+    background-color: #dc3545 !important;
+    color: rgb(255, 255, 255) !important;
+  }
+  
+  /* Estilo de foco nos inputs */
+  input:focus {
+    border-color: #007bff !important;
+    outline: none !important;
+  }
+
+
+#task-form {
+    justify-content: center;
+    height: 100%;
+    z-index: 1000;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.input-with-icon .material-icons {
+    font-size: 20px;
+    color: #888;
+}
+
+/* Estilo para os grupos paralelos (Custo e Prazo) */
+.input-group-parallel {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.input-group-parallel .input-with-icon {
+    flex: 1;
+}
+
+/* Estilo para os botões */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Respiro entre os botões */
+    margin-top: 20px;
+}
+
+button#submit-task, button#cancel-task {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button#submit-task {
+    background-color: #007bff;
+    color: white;
+}
+
+button#cancel-task {
+    background-color: #dc3545;
+    color: white;
+}
+/* Efeitos ao passar o mouse */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Estilo de foco nos inputs */
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Modal: exibição */
+#task-form.show {
+    display: flex;
+}
+
+.task-item {
+    transition: transform 0.3s ease-in-out;
+  }
+
+
+  .task-item.dragging {
+    opacity: 0.5;
+    border: 2px dashed #aaa;
+  }
