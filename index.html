@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Tarefas</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-  <!-- Google Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -16,8 +14,11 @@
     
 
   <div class="background-icons"></div>
-  
-  <!-- Modal para Adicionar Nova Tarefa -->
+  <p>
+      <a href="https://allan-fae-db-default-rtdb.firebaseio.com/tasks.json" target="_blank" class="firebase-link">
+        Link para acessar os dados do Firebase
+      </a>
+  </p>
   <div id="add-task-modal" class="modal">
     <div class="modal-content">
       <h3>Adicionar Nova Tarefa</h3>
@@ -66,7 +67,6 @@
   </div>  
   </h1>
   <div id="task-list">
-    <!-- As tarefas serão listadas aqui -->
     <div class="task-item">
       <div class="task-info">
         <p><strong>Tarefa de exemplo</strong></p>
@@ -107,12 +107,10 @@
   </div>
 
 
-<!-- Modal para Editar Tarefa -->
     <div id="edit-modal" class="modal">
       <div class="modal-content">
         <h3>Editar Tarefa</h3>
         <form id="edit-form">
-          <!-- Nome da Tarefa com ícone -->
           <label id="tsk1" for="edit-task-name">Nome da Tarefa</label>
           <div class="input-group">
             <div class="input-with-icon">
@@ -120,8 +118,6 @@
               <input type="text" id="edit-task-name" placeholder="Nome da tarefa" required />
             </div>
           </div>
-          
-          <!-- Custo e Prazo lado a lado -->
           <div class="input-group input-group-parallel">
             <div class="input-with-icon">
               <span class="material-icons">attach_money</span>
@@ -132,8 +128,6 @@
               <input type="date" id="edit-task-due-date" required />
             </div>
           </div>
-
-          <!-- Botões de salvar e cancelar lado a lado -->
           <div class="button-group">
             <button type="submit" id="edit-task-button">
               <span class="material-icons">save</span> Salvar Alterações
@@ -159,7 +153,7 @@
         </div>
 
 
-        <p class="task-name-line"><span class="material-icons">label</span> Nome: <span class="task-name"></span></p> <!-- Linha do nome -->
+        <p class="task-name-line"><span class="material-icons">label</span> Nome: <span class="task-name"></span></p>
         <div class="task-info-row">
           <p><span class="material-icons">attach_money</span> Custo: <span class="task-cost"></span> R$</p>
         </div>
@@ -167,7 +161,6 @@
           <p><span class="material-icons">event</span> Data: <span class="task-date"></span></p>
         </div>
       </div>
-      <!-- Ações de editar/excluir e setas em uma linha -->
       <div class="task-actions">
         <button class="edit btn btn-primary">
           <span class="material-icons">edit</span>
