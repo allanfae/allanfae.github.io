@@ -15,7 +15,7 @@
 
     
 
-
+  <div class="background-icons"></div>
   
   <!-- Modal para Adicionar Nova Tarefa -->
   <div id="add-task-modal" class="modal">
@@ -152,7 +152,13 @@
   <template id="task-template">
     <div class="task-item" draggable="true" data-task-id="">
       <div class="task-info">
-        <p><span class="material-icons">key</span> ID: <span class="task-id"></span></p>
+
+
+        <div class="task-info-row">
+          <p><span class="material-icons">key</span> ID: <span class="task-id"></span></p>
+        </div>
+
+
         <p class="task-name-line"><span class="material-icons">label</span> Nome: <span class="task-name"></span></p> <!-- Linha do nome -->
         <div class="task-info-row">
           <p><span class="material-icons">attach_money</span> Custo: <span class="task-cost"></span> R$</p>
