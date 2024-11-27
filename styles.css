@@ -5,6 +5,42 @@
     margin-bottom: 0;
 }
 
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #f5f5f5; /* Cor de fundo */
+}
+
+.background-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Coloca atrás do conteúdo */
+    pointer-events: none; /* Torna o fundo "clicável" */
+    background-image: repeating-linear-gradient(
+        0deg, 
+        rgba(0, 0, 0, 0), 
+        rgba(0, 0, 0, 0) 100px, 
+        rgba(187, 187, 187, 0.05) 100px, 
+        rgba(187, 187, 187, 0.05) 200px
+    ),
+    repeating-linear-gradient(
+        90deg, 
+        rgba(0, 0, 0, 0), 
+        rgba(0, 0, 0, 0) 100px, 
+        rgba(187, 187, 187, 0.05) 100px, 
+        rgba(187, 187, 187, 0.05) 200px
+    );
+    background-size: 150px 150px;
+}
+
+
+
+
+
 /* Estilos do botão de adicionar tarefa */
 .modal-btn {
     border-top-left-radius: 8px !important;
@@ -25,11 +61,7 @@
   }
   
   /* Ícone dentro do botão */
-  .modal-btn .material-icons {
-    margin-right: 8px; /* Distância entre o ícone e o texto */
-    font-size: 24px;
-  }
-  
+
   /* Efeito de hover e foco */
   .modal-btn:hover {
     background-color: #cfdff1; /* Azul mais claro ao passar o mouse */
@@ -38,10 +70,11 @@
   
   /* Centraliza o botão na tela */
   .center-button {
-    position: absolute; /* Para posicionar em relação à página */
+    position: fixed; /* Para posicionar em relação à página */
     top: 5%; /* Fixa no fundo da página */
     left: 50%; /* Centraliza horizontalmente */
     transform: translateX(-50%); /* Ajusta o centramento */
+    z-index: 99;
   }
   
 
@@ -111,7 +144,7 @@ form input {
   }
 
 .task-item {
-    min-width: 400px;
+    min-width: 450px;
     background-color: #dce8f4;
     margin: 15px 150px;
     padding: 8px;
@@ -129,29 +162,20 @@ form input {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Remover animação do nome da tarefa */
-.task-info .task-name {
-    transition: none !important; /* Remover qualquer transição ou animação */
-    transform: none !important;  /* Garantir que não tenha transformação */
-}
-
 
 .task-id {
     font-weight: bold;
   }
 
 .task-info p {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     margin-top: 5px;
-    font-size: 1rem;
     color: #333;
-    display: flex;
     align-items: center;  /* Alinha verticalmente o ícone e o texto */
     gap: 2px;  /* Cria um espaço entre o ícone e o texto */
 }
 
 .material-icons {
-    font-size: 20px;  /* Ajuste o tamanho do ícone, se necessário */
     vertical-align: middle; /* Certifica que o ícone fica alinhado com o meio do texto */
   }
 
@@ -161,19 +185,22 @@ form input {
 
   .task-name-line {
     font-weight: bold;        /* Coloca o nome em negrito */
-    font-size: 1.2em;         /* Ajusta o tamanho da fonte */
     color: #387bc4 !important;             /* Define uma cor para o texto */
     margin-bottom: 10px;      /* Dá um pequeno espaçamento abaixo */
   }
   
   .task-name-line .material-icons {
     vertical-align: middle;  /* Alinha o ícone com o texto */
-    margin-right: 5px;        /* Dá um pequeno espaçamento entre o ícone e o nome */
+    font-size: 30px;
   }
   
+.task-info-row .material-icons{
+    font-size: 30px;
+}
 
-
-
+.task-info-row span .material-icons{
+    font-size: 50px;
+}
 
 
 
@@ -187,16 +214,16 @@ form input {
     margin: 0;
     padding: 5px;
     padding-left: 0;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 /* ---------- Destaque de Custo ---------- */
 .task-item.highlight {
-    border: 3px solid #ee6767;
+    border: 3px solid rgb(255, 0, 0);
     box-shadow: 0 4px 10px rgba(243, 156, 18, 0.3);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: yellow;
+    background-color: rgb(255, 211, 211);
 }
 
 .task-item.highlight:hover {
@@ -211,42 +238,31 @@ form input {
     align-items: center; /* Centraliza os botões de Editar e Excluir na coluna */
 }
 
-.task-actions .btn {
-    position: relative;  /* Necessário para posicionar o título */
-}
-
-.task-actions .btn .tooltip {
-    display: none; /* Inicialmente escondido */
+.task-actions button {
+    position: relative; /* Necessário para o posicionamento absoluto do tooltip */
+  }
+  
+  .task-actions .tooltip {
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
+    background-color: #000;
+    color: white;
     padding: 5px 10px;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     border-radius: 4px;
-    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
     white-space: nowrap;
-    opacity: 0; /* Começa invisível */
-    transition: opacity 0.3s ease, visibility 0s 0.3s; /* Transição suave */
-    margin-bottom: 2px;
-}
-
-/* Torna o tooltip visível quando o botão está em hover */
-.task-actions .btn:hover .tooltip {
-    display: block; /* Torna o tooltip visível */
-    opacity: 1;     /* Aumenta a opacidade */
-    visibility: visible; /* Assegura que a tooltip será visível */
-    transition: opacity 0.3s ease, visibility 0s; /* Não adicionar delay para a transição */
-}
-/* ---------- Ajustes para os ícones de ação ---------- */
-button.edit .material-icons,
-button.delete .material-icons {
-    font-size: 16px; /* Ajusta o tamanho dos ícones */
-}
-
-/* ---------- Botões Editar e Excluir ---------- */
+  }
+  
+  .task-actions button:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+  
 button.edit {
     background-color: #3498db;
     color: white;
@@ -275,15 +291,7 @@ button.delete:hover {
     height: 100%;  /* Para garantir que ocupe a altura completa do container */
 }
 
-.task-actions-buttons{
-    display: flex;  
-    flex-direction: column;  /* Organiza os botões Subir e Descer em coluna (um embaixo do outro) */
-    justify-content: center;  /* Centraliza verticalmente os botões dentro da div */
-    align-items: center;  /* Centraliza horizontalmente os botões */
-    gap: 10px;  /* Espaçamento entre os botões */
-    height: 100%;  /* Para garantir que ocupe a altura completa do container */
 
-}
 
 /* ---------- Botões de Ordem (Subir/Descer) ---------- */
 .task-actions-arrows .reorder {
@@ -310,12 +318,12 @@ button.delete:hover {
 
 /* Diminuir o tamanho das setas */
 .task-actions-arrows .reorder .material-icons {
-    font-size: 16px;           /* Tamanho das setas (diminui de 20px para 16px) */
+    font-size: 25px;           /* Tamanho das setas (diminui de 20px para 16px) */
 }
   
 button {
     border-radius: 50%;        /* Bordas arredondadas (circular) */
-    padding: 5px; 
+    padding: 15px; 
     cursor: pointer;
     transition: background-color 0.3s ease, opacity 0.3s ease;
     max-width: 120px;
@@ -447,7 +455,7 @@ h3{
 
 button.edit .material-icons,
 button.delete .material-icons {
-    font-size: 16px; /* Diminui o tamanho dos ícones dentro dos botões */
+    font-size: 25px; /* Diminui o tamanho dos ícones dentro dos botões */
 }
 
 .fade-out {
@@ -462,23 +470,25 @@ button.delete .material-icons {
     border-top-right-radius: 8px; /* Bordas arredondadas */
     border-top-left-radius: 8px;
     padding-top: 20px; /* Padding geral */
-    margin: auto; /* Margem para separação */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
-    max-width: 140vh; /* Limita a largura máxima */
-    width: 100%; /* Garante largura fixa (ajustável conforme necessidade) */
+    max-width: 65%; /* Limita a largura máxima */
+    width: 80%; /* Garante largura ajustável */
     height: 80vh; /* Altura fixa do contêiner */
     display: flex;
     flex-direction: column;
 
-    position: absolute; /* Para posicionar em relação à página */
-    bottom: 0; /* Fixa no fundo da página */
+    position: fixed; /* Fixa o contêiner na posição */
+    bottom: 0; /* Coloca no fundo da página */
     left: 50%; /* Centraliza horizontalmente */
     transform: translateX(-50%); /* Ajusta o centramento */
 
     overflow-y: auto; /* Habilita rolagem interna */
     overflow-x: hidden; /* Evita rolagem horizontal */
     flex-shrink: 0; /* Evita que o contêiner diminua de tamanho */
+    z-index: 1; /* Garante que o contêiner fique acima de outros elementos */
 }
+
+
 
 #task-title {
     position: sticky;
