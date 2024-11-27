@@ -238,36 +238,31 @@ form input {
     align-items: center; /* Centraliza os botões de Editar e Excluir na coluna */
 }
 
-.task-actions .btn {
-    position: relative;  /* Necessário para posicionar o título */
-}
-
-.task-actions .btn .tooltip {
-    display: none; /* Inicialmente escondido */
+.task-actions button {
+    position: relative; /* Necessário para o posicionamento absoluto do tooltip */
+  }
+  
+  .task-actions .tooltip {
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #000000;
-    color: #fff;
+    background-color: #000;
+    color: white;
     padding: 5px 10px;
     font-size: 0.7rem;
     border-radius: 4px;
-    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
     white-space: nowrap;
-    opacity: 0; /* Começa invisível */
-    transition: opacity 0.3s ease, visibility 0s 0.3s; /* Transição suave */
-    margin-bottom: 2px;
-}
-
-/* Torna o tooltip visível quando o botão está em hover */
-.task-actions .btn:hover .tooltip {
-    display: block; /* Torna o tooltip visível */
-    opacity: 1;     /* Aumenta a opacidade */
-    visibility: visible; /* Assegura que a tooltip será visível */
-    transition: opacity 0.3s ease, visibility 0s; /* Não adicionar delay para a transição */
-}
-
+  }
+  
+  .task-actions button:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+  
 button.edit {
     background-color: #3498db;
     color: white;
@@ -476,7 +471,7 @@ button.delete .material-icons {
     border-top-left-radius: 8px;
     padding-top: 20px; /* Padding geral */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
-    max-width: 90%; /* Limita a largura máxima */
+    max-width: 65%; /* Limita a largura máxima */
     width: 80%; /* Garante largura ajustável */
     height: 80vh; /* Altura fixa do contêiner */
     display: flex;
