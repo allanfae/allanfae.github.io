@@ -476,7 +476,7 @@ button.delete .material-icons {
     height: 80vh; /* Altura fixa do contêiner */
     display: flex;
     flex-direction: column;
-
+    min-width: 900px;
     position: fixed; /* Fixa o contêiner na posição */
     bottom: 0; /* Coloca no fundo da página */
     left: 50%; /* Centraliza horizontalmente */
